@@ -15,6 +15,7 @@ int pierwsza(int n)
 int main(int argc, char **argv)
 {
 	int myid, numprocs, P, K, N, part, wynik;
+	double progress, progressByte, progressTotal = 0;
 
 	MPI_Init(&argc, &argv);
 	MPI_Comm_size(MPI_COMM_WORLD, &numprocs);
@@ -35,11 +36,17 @@ int main(int argc, char **argv)
 
 	int result = 0;
 
-	
+	progressByte = (double) 100 / K;
 
 	for (int i = P + part * myid; i <= P + part * (myid + 1) - 1; i++) {
 		if (pierwsza(i) == 1)
 			result++;
+
+		progress =+ progressByte;
+		MPI_Reduce(&progress, &progressTotal, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+
+		if(myid == 0)
+			printf("%f\n", progressTotal);
 	}
 	
 	MPI_Reduce(&result, &wynik, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);

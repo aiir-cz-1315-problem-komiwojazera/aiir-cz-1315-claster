@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdlib>
 #include <algorithm>
+#include <climits>
 #include "Graph.h"
 
 class BF {

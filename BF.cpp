@@ -1,4 +1,5 @@
 #include "BF.h"
+#include "mpi.h"
 #include <vector>
 
 using namespace std;
@@ -48,7 +49,8 @@ void BF::BF_solve(unsigned long long perm_start, unsigned long long perm_end, un
 		}
 		perm_start++;
 	} while (std::next_permutation(route + 1, route + count) && perm_start <= perm_end); // const position of city 1 
-	std::cout << "Skonczono czesc " <<start<<" - "<<perm_end<<endl;
+//	std::cout << "Skonczono czesc " <<start<<" - "<<perm_end<<endl;
+	
 }
 
 /* Calculate cost for given permutation */

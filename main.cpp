@@ -53,10 +53,13 @@ int main(int argc, char* argv[])
 		}
 		cout<<bestCost<<endl;
 	}
+	
+	if(myid == 0){
+		delete graph;
+		delete bf;
+	}
 
 	MPI_Finalize();
 
-	delete graph;
-	delete bf;
 	return 0;
 }
